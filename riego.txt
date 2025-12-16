@@ -1,0 +1,10 @@
+/* ------------------------------------------------------- */
+Sistema de riego por goteo
+Plantas : 180
+Litros por planta : 1.00
+Caudal válvula L/min : 4.00
+------------------------------------------------------------
+Tiempo de apertura : 45.00 min
+Tiempo en segundos : 2700 s
+Litros totales : 180 L
+/* ------------------------------------------------------- */
