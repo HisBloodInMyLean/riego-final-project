@@ -1,6 +1,6 @@
 /* ========================================================
  * Tema: Sistema de Riego
- * Autores: Iván Maldonado Rodríguez y Daniel Palma Valdés
+ * Autores: Iván Maldonado Rodríguez && Damián Palma Valdés
  * Docentes: Hugo Araya Carrasco && Luis Ponce Rosales
  * Curso: INF-123 Programación I
  * Institución: Universidad Católica del Maule
@@ -35,7 +35,10 @@ int main() {
     do {
         mostrar_menu(riego);
         printf("Seleccione una de las opciones: ");
-        scanf("%d", &selector);
+        if (scanf("%d", &selector) != 1) {
+            limpiar_buffer();
+            selector = 0;
+        }
 
         interactuar_menu(&selector, &riego);
 
@@ -51,8 +54,9 @@ void limpiar_buffer() {
 }
 
 /* Lee una cadena de entrada evitando errores de buffer */
-void leer_cadena(char * dest, int size) {
+void leer_cadena(char *dest, int size) {
     int i = 0, c;
+    limpiar_buffer();
     while (i < size) {
         c = getchar();
         /* Termina de leer si se presiona Enter*/
@@ -80,11 +84,18 @@ void mostrar_menu(SistemaRiego riego) {
 
 /* Manejo de respuesta al seleccionar una opción del menú */
 void interactuar_menu(int * selector, SistemaRiego * riego) {
+    float temporal_1 = 0;
+    int temporal_2 = 0;
     switch (*selector) {
         /* 1.- Caudal máximo en litros por minuto*/
         case 1: {
             printf("::: Ingrese el caudal maximo\n>> ");
-            scanf("%f", &riego->caudal);
+            temporal_1 = riego->caudal;
+            if (scanf("%f", &riego->caudal) != 1) {
+                printf("[!] Error: El caudal ingresado no es valido (Solo numericas).\n\n");
+                limpiar_buffer();
+                riego->caudal = temporal_1;
+            }
             break;
         }
         /* 2.- Tipo de planta o cultivo */
@@ -96,19 +107,32 @@ void interactuar_menu(int * selector, SistemaRiego * riego) {
         /* 3.- Número de plantas */
         case 3: {
             printf("::: Ingrese el numero de plantas\n>> ");
-            scanf("%d", &riego->num_plantas);
+            temporal_2 = riego->num_plantas;
+            if (scanf("%d", &riego->num_plantas) != 1) {
+                printf("[!] Error: Cantidad de plantas no valida (Solo numericas enteras).\n\n");
+                limpiar_buffer();
+                riego->num_plantas = temporal_2;
+            }
             break;
         }
         /* 4.- Litros requeridos por planta */
         case 4: {
             printf("::: Ingrese los litros requeridos por planta\n>> ");
-            scanf("%f", &riego->litros);
+            temporal_1 = riego->litros;
+            if (scanf("%f", &riego->litros) != 1) {
+                printf("[!] Error: Cantidad de litros invalida (Solo numericas).\n\n");
+                limpiar_buffer();
+                riego->litros = temporal_1;
+            }
             break;
         }
         /* 5.- Salir/Exportar */
         case 5: {
+            if (riego->litros == 0) {
+                printf("[!] Warning: Los litros por planta son 0, el sistema no se activara.\n");
+            }
             if (riego->caudal <= 0) {
-                printf("[!] Error: El caudal debe ser mayor a 0.\n\n");
+                printf("[!] Error: El caudal y/o litros deben ser mayor a 0.\n\n");
                 /* Se modifica selector a 0 para evitar que finalice el programa */
                 *selector = 0;
             } else {
