@@ -1,6 +1,6 @@
 /* ========================================================
  * Tema: Sistema de Riego
- * Autor: Iván Maldonado Rodríguez
+ * Autores: Iván Maldonado Rodríguez y Daniel Palma Valdés
  * Docentes: Hugo Araya Carrasco && Luis Ponce Rosales
  * Curso: INF-123 Programación I
  * Institución: Universidad Católica del Maule
