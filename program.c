@@ -1,8 +1,11 @@
-/* ====================================
- * Autor: return
- * Tema: Sistema de Riego por Goteo
+/* ========================================================
+ * Tema: Sistema de Riego
+ * Autor: Iván Maldonado Rodríguez
+ * Docentes: Hugo Araya Carrasco && Luis Ponce Rosales
+ * Curso: INF-123 Programación I
+ * Institución: Universidad Católica del Maule
  * Fecha: 17-12-2025
- * ====================================
+ * ========================================================
  */
 #include <stdio.h>
 #define MAX_NOMBRE_PLANTA   (31)
@@ -71,7 +74,7 @@ void mostrar_menu(SistemaRiego riego) {
     printf("2.- Tipo de planta o cultivo ('%s')\n", riego.cultivo);
     printf("3.- Numero de plantas (x%d)\n", riego.num_plantas);
     printf("4.- Litros requeridos por planta (%.2f)\n", riego.litros);
-    printf("5.- Salir\n");
+    printf("5.- Salir/Exportar\n");
     printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");   
 }
 
@@ -102,7 +105,7 @@ void interactuar_menu(int * selector, SistemaRiego * riego) {
             scanf("%f", &riego->litros);
             break;
         }
-        /* 5.- Salir */
+        /* 5.- Salir/Exportar */
         case 5: {
             if (riego->caudal <= 0) {
                 printf("[!] Error: El caudal debe ser mayor a 0.\n\n");
